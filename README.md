@@ -148,7 +148,7 @@ You’ll receive an **Instance Configuration** page that will ask you to confi
 
 ![](./images/instanceconfig.png)
 
-After confirming the appropriate information, click **Save and Finish**. You’ll receive a confirmation page confirming that **“Jenkins is Ready!”**:
+After confirming the appropriate information, click **Save and Finish**. You’ll receive a confirmation page confirming that **“Jenkins is Ready!”**
 
 ![](./images/jenkinscomplete.png)
 
@@ -370,10 +370,12 @@ $ sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
 ```
 
 Great job! Two server blocks are now enabled and configured to respond to requests based on their `listen` and `server_name` directives:
-- `your_domain`: Will respond to requests for `your_domain` and `www.your_domain`.
+- `your_domain`: Will respond to requests for `your_domain` and `www.your_domain`.
 - `default`: Will respond to any requests on port 80 that do not match the other two blocks.
 
-To avoid a possible hash bucket memory problem that can arise from adding additional server names, we must make a minor adjustment. first, open the file:
+To avoid a possible hash bucket memory problem that can arise from adding additional server names, we must make a minor adjustment. 
+
+First, open the file:
 
 ```
 $ sudo nano /etc/nginx/nginx.conf
@@ -442,7 +444,7 @@ Next, find the existing `server_name` line. It should look like this:
 ![](./images/nginxconfig.png)
 
 
-If it does, exit your editor and move on to the next step. However, if it doesn’t, update it to match. Then save the file, quit your editor, and verify the syntax of your configuration edits:
+Next, save the file, quit your editor, and verify the syntax of your configuration edits:
 
 ```
 $ sudo nginx -t
@@ -653,11 +655,7 @@ You can enter the administrative username you created in the **User** field, a
 ![](./images/jenkinslogindom.png)
 
 
-Once logged in, you can change the password to be sure it’s secure. To do this, click on your username in the upper-right-hand corner of the screen. On the main profile page, select **Configure**:
-
-![](./images/jenkinsdash.png)
-
-This will take you to a new page, where you can enter and confirm a new password:
+Once logged in, you can change the password to be sure it’s secure. To do this, click on your username in the upper-right-hand corner of the screen. On the main profile page, select **Configure**. This will take you to a new page, where you can enter and confirm a new password:
 
 ![](./images/newpassword.png)
 
@@ -740,11 +738,20 @@ When you are finished, click **Generate token** at the bottom of the page. The
 
 **Add the GitHub Personal Access Token to Jenkins**
 
-Now that we have a token, we need to add it to our Jenkins server so it can automatically set up webhooks. 
+Now that we have a token, we need to add it to our Jenkins server so it can automatically set up webhooks.
 
 Log into your Jenkins web interface using the administrative account you configured during installation.
 
-Click on your username in the top-right corner to access your user settings, and from there, click **credentials** in the left-hand menu. On the next page, click the arrow next to **(global)** within the **Jenkins** scope. In the box that appears, click **Add credentials**:
+Click on your username in the top-right corner to access your user settings, and from there, click **credentials** in the left-hand menu. 
+
+![](./images/jenkinscredentials1.png)
+
+
+On the next page, click the arrow next to **(global)** within the **Jenkins** scope.
+
+![](./images/credentials.png)
+
+In the box that appears, click **Add credentials**:
 
 ![](./images/addcred.png)
 
@@ -838,13 +845,15 @@ You can verify this by going to your GitHub repository and clicking the **Setti
 ![](./images/webhookpush.png)
 
 
-If for any reason Jenkins failed to register the hook (for example, due to upstream API changes or outages between Jenkins and Github), you can quickly add one yourself by clicking **Add webhook** and ensuring that the **Payload URL** is set to `https://my-jenkins-server:8080/github-webhook` and the **Content type** is set to `application/json`, then clicking **Add webhook** again at the bottom of the prompt.
+If for any reason Jenkins failed to register the hook (for example, due to upstream API changes or outages between Jenkins and Github), you can quickly add one yourself by clicking **Add webhook** and ensuring that the **Payload URL** is set to `https://my-jenkins-server:8080/github-webhook` and the **Content type** is set to `application/json`.
 
 ![](./images/webhookset.png)
 
 Now, when you push new changes to your repository, Jenkins will be notified. It will then pull the new code and retest it using the same procedure.
 
-To approximate this, in our repository page on GitHub, you can click the **Create new file** button to the left of the green **Clone or download** button.
+To demonstrate this, in our repository page on GitHub, click the **Create new file** button to the left of the green **Clone or download** button.
+
+![](./images/newfile.png)
 
 On the next page, choose a filename and some dummy contents:
 
